@@ -32,6 +32,41 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={GeistSans.variable}>
+      return (
+  <html lang="en" className={GeistSans.variable} suppressHydrationWarning>
+    <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+      
+      {/* Script para aplicar tema antes de hidratar */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+(function() {
+  try {
+    var saved = localStorage.getItem('theme');
+    var c = document.documentElement.classList;
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      c.add('dark');
+    } else {
+      c.remove('dark');
+    }
+  } catch (e) {}
+})();
+`
+        }}
+      />
+
+      <CartProvider cartPromise={cart}>
+        <Navbar />
+        <main>
+          {children}
+          <Toaster closeButton />
+          <WelcomeToast />
+        </main>
+      </CartProvider>
+    </body>
+  </html>
+);
+
       <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
           <Navbar />
