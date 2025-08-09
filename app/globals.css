@@ -3,6 +3,9 @@
 @plugin "@tailwindcss/container-queries";
 @plugin "@tailwindcss/typography";
 
+:root { color-scheme: light; }
+html, body { background: #ffffff; color: #111827; }
+
 @layer base {
   *,
   ::after,
@@ -13,11 +16,11 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
   img[loading='lazy'] {
